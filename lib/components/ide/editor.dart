@@ -8,7 +8,28 @@ class Editor extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Toolbar(
-          child: Text('EDITOR', style: TextStyle(color: Colors.white)),
+          child: Text(
+            'EDITOR',
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+        Expanded(
+          child: Stack(
+            children: [
+              Positioned(
+                right: 16,
+                bottom: 16,
+                child: FloatingActionButton(
+                  backgroundColor: Colors.green.shade300,
+                  onPressed: () {},
+                  child: Icon(
+                    Icons.play_arrow,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ],
     );

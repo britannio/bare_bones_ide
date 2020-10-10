@@ -1,0 +1,6 @@
+# Uses Derry, a Dart script manager
+# https://github.com/frencojobs/derry/
+# run `pub global activate derry` to install Derry then `derry <script>` to 
+# execute a script 
+
+build: flutter packages pub run build_runner build --delete-conflicting-outputs
