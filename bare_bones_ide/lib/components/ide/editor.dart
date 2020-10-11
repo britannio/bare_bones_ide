@@ -119,17 +119,27 @@ class _ScriptEditor extends StatefulWidget {
 }
 
 class __ScriptEditorState extends State<_ScriptEditor> {
-  TextEditingController _controller;
+  TextEditingController _textController;
+  final _scrollController = ScrollController();
+  final _lineCountController = ScrollController();
 
   @override
   void initState() {
     super.initState();
-    _controller = TextEditingController(text: widget.script);
+    _textController = TextEditingController(text: widget.script);
+
+    _scrollController.addListener(() {
+      if (_scrollController.offset != _lineCountController.offset) {
+        _lineCountController.jumpTo(_scrollController.offset);
+      }
+    });
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _textController.dispose();
+    _scrollController.dispose();
+    _lineCountController.dispose();
     super.dispose();
   }
 
@@ -139,7 +149,7 @@ class __ScriptEditorState extends State<_ScriptEditor> {
     setState(() {});
   }
 
-  int _lineCount() => _controller.text.split('\n').length;
+  int _lineCount() => _textController.text.split('\n').length;
 
   @override
   Widget build(BuildContext context) {
@@ -147,10 +157,14 @@ class __ScriptEditorState extends State<_ScriptEditor> {
       padding: const EdgeInsets.all(8.0),
       child: Row(
         children: [
-          _LineCounter(lineCount: _lineCount()),
+          PrimaryScrollController(
+            controller: _lineCountController,
+            child: _LineCounter(lineCount: _lineCount()),
+          ),
           Expanded(
             child: TextField(
-              controller: _controller,
+              controller: _textController,
+              scrollController: _scrollController,
               onChanged: _onChanged,
               // Makes the TextField take up all space
               minLines: null,
@@ -158,7 +172,7 @@ class __ScriptEditorState extends State<_ScriptEditor> {
               expands: true,
               decoration: InputDecoration(
                 border: InputBorder.none,
-                contentPadding: EdgeInsets.zero,
+                contentPadding: EdgeInsets.only(top: 4),
               ),
             ),
           ),
@@ -180,6 +194,7 @@ class _LineCounter extends StatelessWidget {
     return SizedBox(
       width: 14.0 * lineCountWidth,
       child: ListView.builder(
+        controller: PrimaryScrollController.of(context),
         physics: NeverScrollableScrollPhysics(),
         padding: EdgeInsets.zero,
         itemCount: lineCount,
