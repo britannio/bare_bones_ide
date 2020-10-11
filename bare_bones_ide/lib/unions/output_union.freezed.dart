@@ -26,8 +26,10 @@ class _$OutputUnionTearOff {
   }
 
 // ignore: unused_element
-  _Error error() {
-    return const _Error();
+  _Error error(String error) {
+    return _Error(
+      error,
+    );
   }
 }
 
@@ -41,13 +43,13 @@ mixin _$OutputUnion {
   Result when<Result extends Object>({
     @required Result noOutput(),
     @required Result output(Map<String, int> variables),
-    @required Result error(),
+    @required Result error(String error),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result noOutput(),
     Result output(Map<String, int> variables),
-    Result error(),
+    Result error(String error),
     @required Result orElse(),
   });
   @optionalTypeArgs
@@ -119,7 +121,7 @@ class _$_NoOutput implements _NoOutput {
   Result when<Result extends Object>({
     @required Result noOutput(),
     @required Result output(Map<String, int> variables),
-    @required Result error(),
+    @required Result error(String error),
   }) {
     assert(noOutput != null);
     assert(output != null);
@@ -132,7 +134,7 @@ class _$_NoOutput implements _NoOutput {
   Result maybeWhen<Result extends Object>({
     Result noOutput(),
     Result output(Map<String, int> variables),
-    Result error(),
+    Result error(String error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -235,7 +237,7 @@ class _$_Output implements _Output {
   Result when<Result extends Object>({
     @required Result noOutput(),
     @required Result output(Map<String, int> variables),
-    @required Result error(),
+    @required Result error(String error),
   }) {
     assert(noOutput != null);
     assert(output != null);
@@ -248,7 +250,7 @@ class _$_Output implements _Output {
   Result maybeWhen<Result extends Object>({
     Result noOutput(),
     Result output(Map<String, int> variables),
-    Result error(),
+    Result error(String error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -298,6 +300,7 @@ abstract class _Output implements OutputUnion {
 abstract class _$ErrorCopyWith<$Res> {
   factory _$ErrorCopyWith(_Error value, $Res Function(_Error) then) =
       __$ErrorCopyWithImpl<$Res>;
+  $Res call({String error});
 }
 
 /// @nodoc
@@ -308,36 +311,56 @@ class __$ErrorCopyWithImpl<$Res> extends _$OutputUnionCopyWithImpl<$Res>
 
   @override
   _Error get _value => super._value as _Error;
+
+  @override
+  $Res call({
+    Object error = freezed,
+  }) {
+    return _then(_Error(
+      error == freezed ? _value.error : error as String,
+    ));
+  }
 }
 
 /// @nodoc
 class _$_Error implements _Error {
-  const _$_Error();
+  const _$_Error(this.error) : assert(error != null);
+
+  @override
+  final String error;
 
   @override
   String toString() {
-    return 'OutputUnion.error()';
+    return 'OutputUnion.error(error: $error)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Error);
+    return identical(this, other) ||
+        (other is _Error &&
+            (identical(other.error, error) ||
+                const DeepCollectionEquality().equals(other.error, error)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(error);
+
+  @override
+  _$ErrorCopyWith<_Error> get copyWith =>
+      __$ErrorCopyWithImpl<_Error>(this, _$identity);
 
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result noOutput(),
     @required Result output(Map<String, int> variables),
-    @required Result error(),
+    @required Result error(String error),
   }) {
     assert(noOutput != null);
     assert(output != null);
     assert(error != null);
-    return error();
+    return error(this.error);
   }
 
   @override
@@ -345,12 +368,12 @@ class _$_Error implements _Error {
   Result maybeWhen<Result extends Object>({
     Result noOutput(),
     Result output(Map<String, int> variables),
-    Result error(),
+    Result error(String error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (error != null) {
-      return error();
+      return error(this.error);
     }
     return orElse();
   }
@@ -385,5 +408,8 @@ class _$_Error implements _Error {
 }
 
 abstract class _Error implements OutputUnion {
-  const factory _Error() = _$_Error;
+  const factory _Error(String error) = _$_Error;
+
+  String get error;
+  _$ErrorCopyWith<_Error> get copyWith;
 }

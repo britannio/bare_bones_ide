@@ -5,6 +5,11 @@ import 'package:provider/provider.dart';
 import 'dart:math' as math;
 
 class Editor extends StatelessWidget {
+  void _run(BuildContext context) {
+    final ideNotifier = context.read<IdeNotifier>();
+    ideNotifier.runScript();
+  }
+
   @override
   Widget build(BuildContext context) {
     final ideNotifier = context.watch<IdeNotifier>();
@@ -57,7 +62,7 @@ class Editor extends StatelessWidget {
                       padding: const EdgeInsets.only(bottom: 16, right: 16),
                       child: FloatingActionButton(
                         backgroundColor: Colors.green.shade300,
-                        onPressed: () {},
+                        onPressed: () => _run(context),
                         child: Icon(
                           Icons.play_arrow,
                           color: Theme.of(context).colorScheme.secondary,
@@ -129,6 +134,8 @@ class __ScriptEditorState extends State<_ScriptEditor> {
   }
 
   void _onChanged(String script) {
+    final notifier = context.read<IdeNotifier>();
+    notifier.script = script;
     setState(() {});
   }
 

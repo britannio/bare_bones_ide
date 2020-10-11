@@ -18,7 +18,7 @@ class Output extends StatelessWidget {
           child: ideNotifier.outputUnion.when(
             noOutput: () => _OutputPlaceholder(),
             output: (variables) => _VariablesList(variables: variables),
-            error: () => Text('Something went wrong. :('),
+            error: (error) => Text(error),
           ),
         ),
       ],
