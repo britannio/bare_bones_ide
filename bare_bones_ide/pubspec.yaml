@@ -24,6 +24,9 @@ dependencies:
   flutter:
     sdk: flutter
 
+  bare_bones_interpreter:
+    path: ../bare_bones_interpreter
+
   provider: ^4.3.2+2
   freezed_annotation: ^0.12.0
 
