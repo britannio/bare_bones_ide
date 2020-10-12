@@ -32,9 +32,11 @@ packages:
   bare_bones_interpreter:
     dependency: "direct main"
     description:
-      path: "../bare_bones_interpreter"
-      relative: true
-    source: path
+      path: "bare_bones_interpreter/"
+      ref: HEAD
+      resolved-ref: "9b8f01793337dc4e1201f9dc63f30e373864ec5d"
+      url: "https://github.com/britannio/bare_bones_ide"
+    source: git
     version: "0.0.0"
   boolean_selector:
     dependency: transitive

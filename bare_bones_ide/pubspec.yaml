@@ -25,7 +25,10 @@ dependencies:
     sdk: flutter
 
   bare_bones_interpreter:
-    path: ../bare_bones_interpreter
+    # path: ../bare_bones_interpreter
+    git:
+      url: https://github.com/britannio/bare_bones_ide
+      path: bare_bones_interpreter/
 
   provider: ^4.3.2+2
   freezed_annotation: ^0.12.0
