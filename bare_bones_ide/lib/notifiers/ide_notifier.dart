@@ -7,7 +7,7 @@ class IdeNotifier extends ChangeNotifier {
   final _parser = Parser();
   final _interpreter = Interpreter();
 
-  String _script = '';
+  String _script = defaultScript;
   set script(String script) => _script = script;
 
   Map<String, int> _outputVariables;
@@ -36,3 +36,40 @@ class IdeNotifier extends ChangeNotifier {
     notifyListeners();
   }
 }
+
+const defaultScript = '''
+// Multiplies X by Y and stores the result in Z
+multiplyXY() do;
+    clear Z;
+    while X not 0 do;
+        clear W;
+        while Y not 0 do;
+            incr Z;
+            incr W;
+            decr Y;
+        end;
+        while W not 0 do;
+            incr Y;
+            decr W;
+        end;
+        decr X;
+    end;
+    clear Y;
+end;
+
+// Sets X to 3
+clear X;
+incr X;
+incr X;
+incr X;
+
+// Sets Y to 4
+clear Y;
+incr Y;
+incr Y;
+incr Y;
+incr Y;
+
+multiplyXY();
+
+''';

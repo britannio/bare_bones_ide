@@ -2,6 +2,7 @@ import 'package:bare_bones_ide/components/ide/editor.dart';
 import 'package:bare_bones_ide/components/ide/output.dart';
 import 'package:bare_bones_ide/notifiers/ide_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class BareBonesIDE extends StatelessWidget {
