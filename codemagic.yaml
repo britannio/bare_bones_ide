@@ -17,7 +17,7 @@ workflows:
         cd . && cd bare_bones_ide
         flutter build web --release -dart-define=FLUTTER_WEB_USE_SKIA=true
         cd build/web
-        7z a -r ../web.zip ./*
+        7z a -r ../../web.zip ./*
     artifacts:
       - build/web.zip
       - flutter_drive.log
